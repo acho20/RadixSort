@@ -1,26 +1,49 @@
 public class Radix{
   public static int nth(int n, int col){
-    for(int i = 0; i < col - 1; i++){
-      n = (n - (n % 10)) / 10;
+    String x = "" + n;
+    int y = 0;
+    if(x.charAt(0) == '-'){
+      y++;
     }
-    return n % 10;
+
+    if (col > length(n) - 1 - y){
+      return 0;
+    }
+    return Integer.parseInt(String.valueOf(x.charAt(x.length() - col-1)));
   }
 
   public static int length(int n){
-    if(n == 0){
-      return 1;
+    String x = "" + n;
+    int y = x.length();
+    if(x.charAt(0) == '-'){
+      return y - 1;
+    }else{
+      return y;
     }
-    int x = 0;
-    while(n > 0){
-      x++;
-      n = (n - (n % 10)) / 10;
-    }
-    return x;
   }
 
   public static void merge(SortableLinkedList original, SortableLinkedList[] buckets){
     for (int i = 0; i < buckets.length; i++){
       original.extend(buckets[i]);
+    }
+  }
+
+  public static void radixSortSimple(SortableLinkedList data){
+    int largestdigit = -1;
+    int current = 0;
+    for(int i = 0; i < data.size();i++){
+      current = data.remove(0);
+      largestdigit = Math.max(length(current), largestdigit);
+      data.add(current);
+    }
+    SortableLinkedList[] buckets = new SortableLinkedList[10];
+
+    for(int i = 0 ; i < largestdigit; i++){
+      for(int j = 0; j < data.size(); j++){
+        current = data.remove(0);
+        buckets[nth(current, i)].add(current);
+      }
+      merge(data, buckets);
     }
   }
 
