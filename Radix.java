@@ -18,8 +18,11 @@ public class Radix{
     return x;
   }
 
-  public static void merge(MyLinkedList original,MyLinkedList[]buckets){
-    
+  public static void merge(SortableLinkedList original, SortableLinkedList[] buckets){
+    original.extend(buckets[0]);
+    for (int i = 1; i < buckets.length; i++){
+      buckets[i-1].extend(buckets[1]);
+    }
   }
 
 }
