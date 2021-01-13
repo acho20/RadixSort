@@ -32,7 +32,6 @@ public class Radix{
     int largestdigit = -1;
     int current = 0;
 
-    System.out.println(data);
 
     for(int i = 0; i < data.size();i++){
       current = data.remove(0);
@@ -54,6 +53,5 @@ public class Radix{
       data = new SortableLinkedList();
       merge(data, buckets);
     }
-    System.out.println(data);
   }
 }
