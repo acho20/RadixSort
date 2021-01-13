@@ -31,20 +31,29 @@ public class Radix{
   public static void radixSortSimple(SortableLinkedList data){
     int largestdigit = -1;
     int current = 0;
+
+    System.out.println(data);
+
     for(int i = 0; i < data.size();i++){
       current = data.remove(0);
       largestdigit = Math.max(length(current), largestdigit);
       data.add(current);
     }
     SortableLinkedList[] buckets = new SortableLinkedList[10];
+    for(int i = 0; i < buckets.length; i++) {
+      buckets[i] = new SortableLinkedList();
+    }
+
+    int datalength = data.size();
 
     for(int i = 0 ; i < largestdigit; i++){
-      for(int j = 0; j < data.size(); j++){
-        current = data.remove(0);
+      for(int j = 0; j < datalength; j++){
+        current = data.get(j);
         buckets[nth(current, i)].add(current);
       }
+      data = new SortableLinkedList();
       merge(data, buckets);
     }
+    System.out.println(data);
   }
-
 }
