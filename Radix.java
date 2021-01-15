@@ -47,7 +47,6 @@ public class Radix{
         current = data.remove(0);
         buckets[nth(current, i)].add(current);
       }
-      data = new SortableLinkedList();
       merge(data, buckets);
     }
   }
